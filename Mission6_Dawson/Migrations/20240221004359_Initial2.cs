@@ -10,13 +10,19 @@ namespace Mission6_Dawson.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.RenameColumn(
+                name: "MovieID",
+                table: "Movies",
+                newName: "MovieId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.RenameColumn(
+                name: "MovieId",
+                table: "Movies",
+                newName: "MovieID");
         }
     }
 }

@@ -7,9 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MovieCollectionContext>(options =>
-{
-    options.UseSqlite(builder.Configuration["ConnectionStrings:JoelConnection"]);
-});
+    options.UseSqlite(builder.Configuration.GetConnectionString("JoelConnection")));
 
 var app = builder.Build();
 

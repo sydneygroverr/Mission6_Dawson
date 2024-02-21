@@ -5,23 +5,24 @@
 
     <form method="post">
 
+    <input type="hidden" asp-for="MovieId" required /><br><br>
+
         <label asp-for="Category">Category:</label><br>
-        <select asp-for="Category" required>
-        <option value="Miscellaneous">Miscellaneous</option>
-        <option value="Television">Television</option>
-        <option value="Drama">Drama</option>
-        <option value="Horror/Suspense">Horror/Suspense</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Family">Family</option>
-        <option value="Action/Adventure">Action/Adventure</option>
-        <option value="VHS">VHS</option>
+        <select asp-for="CategoryId" required>
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+
         </select><br><br>
 
         <label asp-for="Title">Title:</label><br>
         <input asp-for="Title" required /><br><br>
 
         <label asp-for="Year">Year:</label><br>
-        <input asp-for="Year" required/><br><br>
+        <input asp-for="Year" min="1888" required /><br><br>
+
 
         <label asp-for="Director">Director:</label><br>
         <input asp-for="Director" required/><br><br>
@@ -42,8 +43,15 @@
             <option value="false">No</option>
         </select><br><br>
 
-        <label asp-for="Lent_to">Lent To:</label><br>
-        <input asp-for="Lent_to"/><br><br>
+        <label asp-for="LentTo">Lent To:</label><br>
+        <input asp-for="LentTo"/><br><br>
+
+        <label asp-for="CopiedToPlex">Copied To Plex:</label><br>
+        <select asp-for="CopiedToPlex">
+                <option>Select</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select><br><br>
 
         <label asp-for="Notes">Notes (Max 25 characters):</label><br>
         <input asp-for="Notes" maxlength="25"/><br><br>

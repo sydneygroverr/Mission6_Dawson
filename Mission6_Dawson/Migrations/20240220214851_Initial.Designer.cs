@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mission6_Dawson.Models;
 
@@ -10,9 +11,11 @@ using Mission6_Dawson.Models;
 namespace Mission6_Dawson.Migrations
 {
     [DbContext(typeof(MovieCollectionContext))]
-    partial class MovieCollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20240220214851_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -76,20 +79,18 @@ namespace Mission6_Dawson.Migrations
 
             modelBuilder.Entity("Mission6_Dawson.Models.Movie", b =>
                 {
-                    b.Property<int>("MovieId")
+                    b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CopiedToPlex")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Edited")
+                    b.Property<bool?>("Edited")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Lent_to")
@@ -99,6 +100,7 @@ namespace Mission6_Dawson.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -108,7 +110,7 @@ namespace Mission6_Dawson.Migrations
                     b.Property<int>("Year")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MovieId");
+                    b.HasKey("MovieID");
 
                     b.HasIndex("CategoryId");
 
@@ -119,7 +121,9 @@ namespace Mission6_Dawson.Migrations
                 {
                     b.HasOne("Mission6_Dawson.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
